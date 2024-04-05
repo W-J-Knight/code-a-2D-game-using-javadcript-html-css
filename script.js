@@ -79,7 +79,6 @@ window.addEventListener("load", function () {
       if (this.game.ammo > 0){
         this.projectiles.push(new Projectile(this.game, this.x + 80, this.y + 30));
         this.game.ammo--;
-
       }
     }
   }
@@ -136,5 +135,5 @@ window.addEventListener("load", function () {
     game.draw(ctx);
     requestAnimationFrame(animate);
   }
-  animate();
+  animate(0);
 });
