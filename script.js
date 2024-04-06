@@ -28,14 +28,14 @@ window.addEventListener("load", function () {
       this.game = game;
       this.x = x;
       this.y = y;
-      this.width = 10;
+      this.width = 10;   
       this.height = 3;
       this.speed = 3;
       this.markedForDeletion = false;
     }
     update(){
       this.x += this.speed;
-      if(this.x > this.game.with * 0.8) this.markedForDeletion = true;
+      if(this.x > this.game.width * 0.8) this.markedForDeletion = true;
     }
     draw(context){
       context.fillStyle = 'yellow';
@@ -92,7 +92,7 @@ window.addEventListener("load", function () {
     }
     update(){
       this.x += this.speedX;
-      if (this.x + this.width < 0 ) this.markedForDeletion = true;
+      if(this.x + this.width < 0 ) this.markedForDeletion = true;
     }
     draw(context){
       context.fillStyle = 'red';
@@ -159,8 +159,18 @@ window.addEventListener("load", function () {
       }
       this.enemies.forEach(enemy => {
         enemy.update();
+        if(this.checkCollosion(this.player, enemy)){
+        enemy.markedForDeletion = true;
+        console.log("hit")
+       }
+      //  this.player.projectiles.forEach(projectile => {
+      //   if(this.checkCollosion(this.player, enemy)){
+      //     enemy.lives--;
+      //     console.log("hit")
+      //    }
+      //  })
       })
-      this.enemies.filter(enemy => !enemy.markedForDeletion);
+      this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
       if (this.enemyTimer > this.enemyInterval && !this.gameOver){
         this.addEnemy();
         this.enemyTimer = 0;
@@ -177,7 +187,13 @@ window.addEventListener("load", function () {
     }
     addEnemy(){
       this.enemies.push(new Angler1(this));
-      console.log(this.enemies)
+      // console.log(this.enemies)
+    }
+    checkCollosion(rect1, rect2){
+        return(rect1.x < rect2.x + rect2.width &&
+               rect1.x + rect1.width > rect2.x &&
+               rect1.y < rect2.y + rect2.height &&
+               rect1.height + rect1.y > rect2.y)
     }
   }
   const game = new Game(canvas.width, canvas.height);
@@ -189,7 +205,7 @@ window.addEventListener("load", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     game.update(deltaTime);
     game.draw(ctx);
-    requestAnimationFrame(animate);
+    // requestAnimationFrame(animate);
   }
   animate(0);
 });
