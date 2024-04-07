@@ -2,7 +2,7 @@ window.addEventListener("load", function () {
   // canvas setup
   const canvas = this.document.getElementById("canvas1");
   const ctx = canvas.getContext("2d");
-  canvas.width = 500;
+  canvas.width = 700;
   canvas.height = 500;
 
   class InputHandler {
@@ -108,7 +108,7 @@ window.addEventListener("load", function () {
       this.maxFrame = 37;
     }
     update(){
-      this.x += this.speedX;
+      this.x += this.speedX -this.game.speed;
       if(this.x + this.width < 0 ) this.markedForDeletion = true;
       // sprite animation
       if(this.frameX < this.maxFrame){
