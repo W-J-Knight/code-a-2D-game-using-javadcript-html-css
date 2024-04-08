@@ -34,14 +34,14 @@ window.addEventListener("load", function () {
       this.height = 3;
       this.speed = 3;
       this.markedForDeletion = false;
+      this.image = document.getElementById('projectile');
     }
     update(){
       this.x += this.speed;
       if(this.x > this.game.width * 0.8) this.markedForDeletion = true;
     }
     draw(context){
-      context.fillStyle = 'yellow';
-      context.fillRect(this.x, this.y, this.width, this.height);
+      context.drawImage(this.image, this.x, this.y)
     }
   }
 
@@ -228,7 +228,7 @@ window.addEventListener("load", function () {
     constructor(game){
       this.game = game;
       this.frontSize = 25;
-      this.fontFalimy = 'Helvetica';
+      this.fontFamily = 'Bangers';
       this.color = 'white'
     }
     draw(context){
@@ -237,7 +237,7 @@ window.addEventListener("load", function () {
       context.shadowOffsetX = 2;
       context.shadowOffsetY = 2;
       context.shadowColor = 'black';
-      context.font = this.frontSize + 'px' + this.fontFalimy
+      context.font = this.frontSize + 'px' + this.fontFamily
       //score
       context.fillText("Score: " + this.game.score, 20, 40)
 
@@ -250,16 +250,16 @@ window.addEventListener("load", function () {
         let message1;
         let message2;
         if(this.game.score > this.game.winningScore){
-          message1 ='You Win!'
-          message2 = 'Well done'
+          message1 ='Most Wondrous!'
+          message2 = 'Well done explorer'
         }else{
-          message1 ='You lose!'
-          message2 = 'Try again next time'
+          message1 ='Blazes!'
+          message2 = 'Get my repair kit and try again!'
         }
-        context.font = "50px " + this.fontFalimy;
-        context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 -40)
-        context.font = "25px " + this.fontFalimy;
-        context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 40)
+        context.font = "70px " + this.fontFamily;
+        context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 -20)
+        context.font = "25px " + this.fontFamily;
+        context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 20)
       }
       // ammo
       if(this.game.player.powerUp) context.fillStyle = '#ffffbd';
